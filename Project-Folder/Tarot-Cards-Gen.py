@@ -30,23 +30,19 @@ def upright_reversed(): # this function will be called after each draw to determ
         return card
  
 def maj_or_min(): # If the card will be a Major arcana or Minor arcana card
-    probi = 1
-    for x in range(1, rd.randint(1,18)):
-        probi=x
+    probi = rd.randint(0,18)
     if probi in range(0,12):
         return "Minor"
-    elif probi in range(12,18):
+    elif probi in range(12,19):
         return "Major"
  
  
  
 def court_or_crowd(): # determine if court or crowd
-    probi = 1
-    for x in range(1, rd.randint(1,18)):
-        probi=x
+    probi = rd.randint(0,18)
     if probi in range(0,12):
         return "Crowd"
-    elif probi in range(12,18):
+    elif probi in range(12,19):
         return "Court"
  
  
@@ -54,10 +50,10 @@ def suite_pull(suiteR):  # determines what the suite will get for court and crow
     court = ["King", "Queen", "Knight", "Page"]
     crowd = ["Ace", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"]
     if suiteR == "Crowd":
-        return crowd.pop(rd.randint(0,10))
+        return crowd[rd.randint(0,3)]
  
     elif suiteR == "Court":
-        return court.pop(rd.randint(0,3))
+        return court[rd.randint(0,3)]
     
 
 
@@ -79,41 +75,71 @@ def card_pull(cardR,suiteR): # determines if the card is a Major card or a suite
  
 
 
+
+def linearSearch(array, n, x):
+    for i in range(n):
+        if (array[i] == x):
+            return x
+    return x
+
+
+
+
+
  
  
 def logic():
     used_cards = []
+    leng = len(used_cards)
+    
     
     # for lack of a better word, the "factory" of the the cards being pulled.
-    for _ in range(1,50):
+    for _ in range(1,72):
         suiteR = court_or_crowd()
         cardR = maj_or_min()
         card_pull(cardR,suiteR)
-        if card_pull(cardR,suiteR) not in used_cards:
-            used_cards.append(card_pull(cardR,suiteR))
+        results = linearSearch(used_cards, leng, card_pull(cardR,suiteR))
+        if results in used_cards:
+            card_pull(cardR,suiteR)
+        else:
+            if results not in used_cards:
+                used_cards.append(results)
+        
+        
+        
+
+
+
+
+
+
+        # if card_pull(cardR,suiteR) not in used_cards:
+        #     used_cards.append(card_pull(cardR,suiteR))
+
 
 
         # this will check if the card being put together had been created already
-        else:
-            for z in used_cards:
-                if z == card_pull(cardR,suiteR):
-                    suiteR = court_or_crowd()
-                    cardR = maj_or_min()
-                    card_pull(cardR,suiteR)
-                    if card_pull(cardR,suiteR) not in used_cards:
-                        used_cards.append(card_pull(cardR,suiteR))
-                        break
+        # else:
+        #     for z in used_cards:
+        #         if z == card_pull(cardR,suiteR):
+        #             suiteR = court_or_crowd()
+        #             cardR = maj_or_min()
+        #             card_pull(cardR,suiteR)
+        #             if card_pull(cardR,suiteR) not in used_cards:
+        #                 used_cards.append(card_pull(cardR,suiteR))
+        #                 break
 
 
-            while card_pull(cardR,suiteR) in used_cards:
-                suiteR = court_or_crowd()
-                cardR = maj_or_min()
-                card_pull(cardR,suiteR)
-                if card_pull(cardR,suiteR) not in used_cards:
-                    used_cards.append(card_pull(cardR,suiteR))
-                    break
+        #     while card_pull(cardR,suiteR) in used_cards:
+        #         suiteR = court_or_crowd()
+        #         cardR = maj_or_min()
+        #         card_pull(cardR,suiteR)
+        #         if card_pull(cardR,suiteR) not in used_cards:
+        #             used_cards.append(card_pull(cardR,suiteR))
+        #             break
 
     logic.myDeck = list(dict.fromkeys(used_cards))
+    
 
 
 def cardCall():
