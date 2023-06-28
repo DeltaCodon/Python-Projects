@@ -60,12 +60,12 @@ def court_or_crowd(): # determine if court or crowd
  
 def suite_pull(suiteR):  # determines what the suite will get for court and crowd
     court = ["King", "Queen", "Knight", "Page"]
-    crowd = ["Ace", "One", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"]
+    crowd = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"]
     if suiteR == "Crowd":
         return crowd[rd.randint(0,3)]
  
     elif suiteR == "Court":
-        return court[rd.randint(0,3)]
+        return court[rd.randint(0,9)]
     
 
 
@@ -122,7 +122,7 @@ def logic():
 
 
 
-def cardCall(): # this will han fdle to inputs for rows of cards and cards pull per row and display the cards
+def cardCall(): # this will handle the inputs for rows of cards and cards pull per row and display the cards
     row = row_selction()             
     newrange = 0
     for r in range(1,row+1): 
