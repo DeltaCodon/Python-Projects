@@ -62,10 +62,10 @@ def suite_pull(suiteR):  # determines what the suite will get for court and crow
     court = ["King", "Queen", "Knight", "Page"]
     crowd = ["Ace", "Two", "Three", "Four", "Five", "Six", "Seven", "Eight", "Nine", "Ten"]
     if suiteR == "Crowd":
-        return crowd[rd.randint(0,3)]
+        return crowd[rd.randint(0,9)]
  
     elif suiteR == "Court":
-        return court[rd.randint(0,9)]
+        return court[rd.randint(0,3)]
     
 
 
