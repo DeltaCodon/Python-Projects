@@ -85,41 +85,25 @@ def card_pull(cardR,suiteR): # determines if the card is a Major card or a suite
     elif cardR == "Major":
         return Major.pop(rd.randint(0,21))
  
-
-
-
-def linearSearch(array, n, x):
-    for i in range(n):
-        if (array[i] == x):
-            return x
-    return x
-
- 
  
 
 def logic():
-    used_cards = []
-    leng = len(used_cards)
+    logic.my_Deck = []
+
     
     # for lack of a better word, the "factory" of the the cards being pulled.
-    for _ in range(1,72):
+    while len(logic.my_Deck) < 25:
         suiteR = court_or_crowd()
         cardR = maj_or_min()
         card_pull(cardR,suiteR)
-        results = linearSearch(used_cards, leng, card_pull(cardR,suiteR))
+        results = card_pull(cardR,suiteR)
+    #     # this will check if the card being put together had been created already        
+        if results in logic.my_Deck:
+            continue
+        if results not in logic.my_Deck:
+                logic.my_Deck.append(results)
 
-        # this will check if the card being put together had been created already
-        if results in used_cards:
-            suiteR = court_or_crowd()
-            cardR = maj_or_min()
-            card_pull(cardR,suiteR)
-        else:
-            if results not in used_cards:
-                used_cards.append(results)
-
-    logic.myDeck = list(dict.fromkeys(used_cards))
     
-
 
 
 def cardCall(): # this will handle the inputs for rows of cards and cards pull per row and display the cards
@@ -128,10 +112,9 @@ def cardCall(): # this will handle the inputs for rows of cards and cards pull p
     for r in range(1,row+1): 
         column = card_num_selction(r)
         for _ in range(1,column+1):
-            print(f"\n For row {r}: {logic.myDeck[newrange]}, {upright_reversed()} \n")
+            print(f"\n For row {r}: {logic.my_Deck[newrange]}, {upright_reversed()} \n")
             newrange += 1
             
-
 
 
 def main():
